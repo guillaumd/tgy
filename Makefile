@@ -11,16 +11,10 @@ AUX_TARGETS = afro_pr0 afro_pr1 diy0
 
 all: $(ALL_TARGETS)
 
-$(ALL_TARGETS): tgy.asm boot.inc
-	$(ASM) -fI -o $@ -D $@_esc -e $@.eeprom -d $@.obj $@.asm
+$(ALL_TARGETS):
+	$(ASM) -fI -o $@ -D $@_esc -e $@.eeprom -d $@.obj tgy.asm
 
-$(AUX_TARGETS): tgy.asm boot.inc
-
-.inc.hex:
-	@test -e $(*F).asm ||ln -s tgy.asm $(*F).asm
-	@echo "$(ASM) -fI -o $(@F) -D $(*F)_esc -e $(*F).eeprom -d $(*F).obj $(*F).asm"
-	@set -o pipefail; $(ASM) -fI -o $@ -D $*_esc -e $*.eeprom -d $*.obj $*.asm 2>&1 | sed '/PRAGMA directives currently ignored/d'
-	#@test -L $*.asm && rm -f $*.asm || true
+$(AUX_TARGETS): 
 
 test: all
 
