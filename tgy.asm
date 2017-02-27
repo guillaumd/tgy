@@ -483,29 +483,7 @@ eeprom_defaults_w:
 	.endif
 .endmacro
 
-;-- LED macros -----------------------------------------------------------
-
-.if !defined(red_led)
-	.macro RED_on
-	.endmacro
-	.macro RED_off
-	.endmacro
-.endif
-
-.if !defined(green_led)
-	.macro GRN_on
-	.endmacro
-	.macro GRN_off
-	.endmacro
-.endif
-
-.if !defined(blue_led)
-	.macro BLUE_on
-	.endmacro
-	.macro BLUE_off
-	.endmacro
-.endif
-
+#include "macro_led.inc"
 ;-- FET driving macros ---------------------------------------------------
 ; Careful: "if" conditions split over multiple lines (with backslashes)
 ; work with arva, but avrasm2.exe silently produces wrong results.
